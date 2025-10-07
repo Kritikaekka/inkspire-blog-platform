@@ -13,36 +13,39 @@ function ProfilePage() {
 
   const isOwnProfile = user?.id === id;
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/api/users/${id}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
-        setProfile(res.data);
-        setBioInput(res.data.bio || '');
-      } catch (err) {
-        setProfile(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProfile();
-  }, [id, token]);
-
-  const saveBio = async () => {
+useEffect(() => {
+  const fetchProfile = async () => {
     try {
-      await axios.put(
-        `http://localhost:5000/api/users/${id}`,
-        { bio: bioInput },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setProfile(prev => ({ ...prev, bio: bioInput }));
-      setEditing(false);
+      const API_BASE = process.env.REACT_APP_API_URL;
+      const res = await axios.get(`${API_BASE}/api/users/${id}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+      setProfile(res.data);
+      setBioInput(res.data.bio || '');
     } catch (err) {
-      alert('Failed to save bio');
+      setProfile(null);
+    } finally {
+      setLoading(false);
     }
   };
+  fetchProfile();
+}, [id, token]);
+
+const saveBio = async () => {
+  try {
+    const API_BASE = process.env.REACT_APP_API_URL;
+    await axios.put(
+      `${API_BASE}/api/users/${id}`,
+      { bio: bioInput },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setProfile(prev => ({ ...prev, bio: bioInput }));
+    setEditing(false);
+  } catch (err) {
+    alert('Failed to save bio');
+  }
+};
+
 
   if (loading) return <div>Loading...</div>;
   if (!profile) return <div>User not found.</div>;

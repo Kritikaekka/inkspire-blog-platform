@@ -12,9 +12,10 @@ function NewPostPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/posts', { title, content }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const API_BASE = process.env.REACT_APP_API_URL;
+await axios.post(`${API_BASE}/api/posts`, { title, content }, {
+  headers: { Authorization: `Bearer ${token}` }
+});
       alert('Post created successfully!');
       navigate('/posts');
     } catch (err) {

@@ -12,39 +12,45 @@ function EditPostPage() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {}
-        });
-        setTitle(res.data.title || '');
-        setContent(res.data.content || '');
-      } catch (err) {
-        alert('Could not load post.');
-        navigate('/posts');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPost();
-  }, [id, token, navigate]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+useEffect(() => {
+  const fetchPost = async () => {
     try {
-      await axios.put(
-        `http://localhost:5000/api/posts/${id}`,
-        { title, content },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      alert('Post updated!');
-      navigate(`/posts/${id}`);
+      setLoading(true);
+      const API_BASE = process.env.REACT_APP_API_URL;
+
+      const res = await axios.get(`${API_BASE}/api/posts/${id}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+
+      setTitle(res.data.title || '');
+      setContent(res.data.content || '');
     } catch (err) {
-      alert('Failed to update post.');
+      alert('Could not load post.');
+      navigate('/posts');
+    } finally {
+      setLoading(false);
     }
   };
+  fetchPost();
+}, [id, token, navigate]);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const API_BASE = process.env.REACT_APP_API_URL;
+
+    await axios.put(
+      `${API_BASE}/api/posts/${id}`,
+      { title, content },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    alert('Post updated!');
+    navigate(`/posts/${id}`);
+  } catch (err) {
+    alert('Failed to update post.');
+  }
+};
 
   if (loading)
     return <div style={{ color: '#fff', padding: '2rem' }}>Loading...</div>;

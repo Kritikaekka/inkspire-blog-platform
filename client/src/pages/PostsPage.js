@@ -8,19 +8,20 @@ function PostsPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await axios.get('http://localhost:5000/api/posts');
-        setPosts(res.data);
-      } catch (err) {
-        console.error('Failed to fetch posts', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
-  }, []);
+useEffect(() => {
+  const fetchPosts = async () => {
+    try {
+      const API_BASE = process.env.REACT_APP_API_URL;
+      const res = await axios.get(`${API_BASE}/api/posts`);
+      setPosts(res.data);
+    } catch (err) {
+      console.error('Failed to fetch posts', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchPosts();
+}, []);
 
   if (loading) return <Loader />;
 
