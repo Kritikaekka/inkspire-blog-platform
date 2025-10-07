@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import jwtDecode from 'jwt-decode';
 
+
 function PostDetailsPage() {
   const { id } = useParams();
   const { token } = useContext(AuthContext);
