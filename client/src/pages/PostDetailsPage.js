@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+
 
 
 function PostDetailsPage() {

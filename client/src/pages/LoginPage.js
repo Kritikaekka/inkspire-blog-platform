@@ -82,6 +82,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
+      
       const API_BASE = process.env.REACT_APP_API_URL;
 const response = await fetch(`${API_BASE}/api/auth/login`, {
   method: 'POST',
