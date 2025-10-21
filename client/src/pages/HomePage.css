@@ -1,0 +1,87 @@
+.homepage-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 80vw;
+  padding: 0 6rem;
+  background-color: #00000074;
+  backdrop-filter: blur(3px);
+  margin-left: 55px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+
+.homepage-heading {
+  color: #fff;
+  font-size: 6rem;
+  font-weight: bold;
+  font-family: 'Finger Paint', sans-serif;
+  max-width: 50%;
+  text-align: left;
+  border-radius: 40px;
+  padding: 1rem;
+}
+
+.homepage-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 40%;
+  cursor: pointer;
+  color: #f9e4c7;
+  font-family: 'Finger Paint', sans-serif;
+}
+
+.homepage-image {
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 400px;
+  backdrop-filter: blur(9px);
+}
+
+.homepage-start-btn {
+  font-size: 3rem;
+  padding: 0.8rem 4.8rem;
+  border-radius: 9999px;
+  background: black;
+  color: #fff;
+  transition: all 0.2s;
+}
+.homepage-start-btn:hover {
+  background-color: #f9e4c7;
+  color: #000;
+}
+
+/* MOBILE: stack vertically, shrink everything */
+@media (max-width: 700px) {
+  .homepage-container {
+    flex-direction: column;
+    width: 96vw;
+    margin: 2vw 2vw;
+    padding: 1rem;
+    align-items: center;
+  }
+  .homepage-heading {
+    font-size: 2.2rem;
+    max-width: 100%;
+    text-align: center;
+    padding: 0.8rem 0;
+  }
+  .homepage-right {
+    max-width: 100%;
+    margin-top: 1.5rem;
+  }
+  .homepage-image {
+    width: 85vw;
+    max-width: 300px;
+    min-width: 160px;
+    height: auto;
+  }
+  .homepage-start-btn {
+    font-size: 1.3rem;
+    padding: 0.6rem 2.2rem;
+    margin: 0.6rem auto 0 auto;
+  }
+}
